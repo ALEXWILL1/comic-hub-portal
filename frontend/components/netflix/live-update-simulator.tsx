@@ -28,7 +28,7 @@ export const LiveUpdateSimulator: React.FC<LiveUpdateSimulatorProps> = ({ comics
       });
       const data = await res.json();
       if (data.success) {
-        setToastMessage(`⚡ Episode Baru Terbit! (${data.data.title})`);
+        setToastMessage(`⚡ Episode Baru Terbi! (${data.data.title})`);
         onChapterAdded();
         setCustomTitle("");
         setTimeout(() => setToastMessage(null), 4000);
