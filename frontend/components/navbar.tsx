@@ -101,7 +101,7 @@ export const SmartNavbar = () => {
           <Link
             href="/catalog"
             className="w-8 h-8 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white transition-colors"
-            title="Daftar Komik"
+            title="Daftar Kom"
           >
             <Bookmark className="w-4 h-4" />
           </Link>
