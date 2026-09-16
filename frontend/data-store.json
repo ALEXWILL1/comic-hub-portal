@@ -1,0 +1,300 @@
+[
+  {
+    "id": "catching-up-with-luke-bischel",
+    "title": "Catching Up With Luke Bischel",
+    "slug": "catching-up-with-luke-bischel",
+    "cover": "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1600&auto=format&fit=crop",
+    "description": "Manhwa Catching Up With Luke Bischel di-import secara otomatis dari link https://mymanhwalist.com/manhwa/catching-up-with-luke-bischel/. Menyediakan update chapter tercepat dengan terjemahan Bahasa Indonesia.",
+    "rating": 4.9,
+    "genres": [
+      "Action",
+      "Fantasy",
+      "Supernatural"
+    ],
+    "status": "ongoing",
+    "type": "Manhwa",
+    "updatedAt": "2026-09-16T18:15:04.122Z",
+    "chapters": [
+      {
+        "id": "ch-1",
+        "chapterNumber": 1,
+        "title": "Chapter 1 [Imported]",
+        "releasedAt": "2026-09-16T18:15:04.121Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "nano-machine",
+    "title": "Nano Machine",
+    "slug": "nano-machine",
+    "cover": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1600&auto=format&fit=crop",
+    "description": "Pangeran Sekte Iblis yang terbuang disuntik dengan Nano Machine ciptaan masa depan. Perjalanannya menjadi Dewa Iblis pun dimulai!",
+    "rating": 4.8,
+    "genres": [
+      "Martial Arts",
+      "Sci-Fi",
+      "Action",
+      "Cultivation"
+    ],
+    "status": "ongoing",
+    "type": "Manhwa",
+    "updatedAt": "2026-09-16T18:12:00.125Z",
+    "isTrending": true,
+    "rank": 5,
+    "chapters": [
+      {
+        "id": "ch-216",
+        "chapterNumber": 216,
+        "title": "1",
+        "releasedAt": "2026-09-16T18:12:00.125Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop"
+        ]
+      },
+      {
+        "id": "ch-215",
+        "chapterNumber": 215,
+        "title": "Operasi Otomatis Nano",
+        "releasedAt": "2026-09-16T10:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "overlord-of-insects",
+    "title": "Overlord Of Insects",
+    "slug": "overlord-of-insects",
+    "cover": "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1600&auto=format&fit=crop",
+    "description": "Manhwa Overlord Of Insects di-import secara otomatis dari link https://www.topmanhua.fan/manhua/overlord-of-insects. Menyediakan update chapter tercepat dengan terjemahan Bahasa Indonesia.",
+    "rating": 4.9,
+    "genres": [
+      "Action",
+      "Fantasy",
+      "Supernatural"
+    ],
+    "status": "ongoing",
+    "type": "Manhua",
+    "updatedAt": "2026-09-16T18:11:18.219Z",
+    "chapters": [
+      {
+        "id": "ch-2",
+        "chapterNumber": 2,
+        "title": "p",
+        "releasedAt": "2026-09-16T18:11:18.219Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop"
+        ]
+      },
+      {
+        "id": "ch-1",
+        "chapterNumber": 1,
+        "title": "Chapter 1 [Imported]",
+        "releasedAt": "2026-09-16T18:08:49.375Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "imported-manhwa",
+    "title": "Imported Manhwa",
+    "slug": "imported-manhwa",
+    "cover": "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1600&auto=format&fit=crop",
+    "description": "Manhwa Imported Manhwa di-import secara otomatis dari link https://www.topmanhua.fan/manhua/overlord-of-insects/chapter-134. Menyediakan update chapter tercepat dengan terjemahan Bahasa Indonesia.",
+    "rating": 4.9,
+    "genres": [
+      "Action",
+      "Fantasy",
+      "Supernatural"
+    ],
+    "status": "ongoing",
+    "type": "Manhua",
+    "updatedAt": "2026-09-16T18:10:21.040Z",
+    "chapters": [
+      {
+        "id": "ch-1",
+        "chapterNumber": 1,
+        "title": "Chapter 134 [Imported]",
+        "releasedAt": "2026-09-16T18:10:21.040Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop",
+          "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "solo-leveling-ragnarok",
+    "title": "Solo Leveling: Ragnarok",
+    "slug": "solo-leveling-ragnarok",
+    "cover": "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=1600&auto=format&fit=crop",
+    "description": "Bumi kembali terancam setelah gerbang dimensi baru terbuka. Sung Su-ho, putra tunggal Sung Jin-woo, membangkitkan kekuatan Monarch of Shadows!",
+    "rating": 4.9,
+    "genres": [
+      "Action",
+      "Fantasy",
+      "System",
+      "Supernatural"
+    ],
+    "status": "ongoing",
+    "type": "Manhwa",
+    "updatedAt": "2026-09-16T18:08:49.369Z",
+    "isTrending": true,
+    "rank": 1,
+    "chapters": [
+      {
+        "id": "ch-14",
+        "chapterNumber": 14,
+        "title": "Pertarungan di Dungeon Bayangan",
+        "releasedAt": "2026-09-16T18:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      },
+      {
+        "id": "ch-13",
+        "chapterNumber": 13,
+        "title": "Kebangkitan Pasukan Bayangan",
+        "releasedAt": "2026-09-15T18:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      },
+      {
+        "id": "ch-12",
+        "chapterNumber": 12,
+        "title": "Raid Rank S",
+        "releasedAt": "2026-09-14T18:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "orv",
+    "title": "Omniscient Reader's Viewpoint",
+    "slug": "orv",
+    "cover": "https://images.unsplash.com/photo-1563089145-599997674d42?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1600&auto=format&fit=crop",
+    "description": "Kim Dokja adalah satu-satunya pembaca web novel yang bertahan sampai akhir. Tiba-tiba, dunia novel yang dia baca menjadi kenyataan!",
+    "rating": 4.9,
+    "genres": [
+      "Action",
+      "Apocalypse",
+      "System",
+      "Fantasy"
+    ],
+    "status": "ongoing",
+    "type": "Manhwa",
+    "updatedAt": "2026-09-16T17:08:49.369Z",
+    "isTrending": true,
+    "rank": 2,
+    "chapters": [
+      {
+        "id": "ch-210",
+        "chapterNumber": 210,
+        "title": "Skenario Ke-73",
+        "releasedAt": "2026-09-16T17:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      },
+      {
+        "id": "ch-209",
+        "chapterNumber": 209,
+        "title": "Raja Tanpa Tahta",
+        "releasedAt": "2026-09-15T17:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "tbate",
+    "title": "The Beginning After The End",
+    "slug": "tbate",
+    "cover": "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=1600&auto=format&fit=crop",
+    "description": "Raja Grey terlahir kembali di dunia sihir sebagai Arthur Leywin. Bertekad melindung keluarga barunya dari ancaman kegelapan.",
+    "rating": 4.8,
+    "genres": [
+      "Isekai",
+      "Magic",
+      "Adventure",
+      "Action"
+    ],
+    "status": "ongoing",
+    "type": "Manhwa",
+    "updatedAt": "2026-09-16T16:08:49.369Z",
+    "isTrending": true,
+    "rank": 3,
+    "chapters": [
+      {
+        "id": "ch-185",
+        "chapterNumber": 185,
+        "title": "Pertempuran Xyrus Academy",
+        "releasedAt": "2026-09-16T16:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      },
+      {
+        "id": "ch-184",
+        "chapterNumber": 184,
+        "title": "Kekuatan Mana Core Kuning",
+        "releasedAt": "2026-09-15T15:45:29.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mount-hua",
+    "title": "Return of the Mount Hua Sect",
+    "slug": "mount-hua",
+    "cover": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop",
+    "backdrop": "https://images.unsplash.com/photo-1514539079130-25950c84af65?q=80&w=1600&auto=format&fit=crop",
+    "description": "Chung Myung, Pedang Suci Plum Blossom, terbangun 100 tahun di masa depan dan menemukan sekte Gunung Hua miliknya telah hancur!",
+    "rating": 4.9,
+    "genres": [
+      "Martial Arts",
+      "Comedy",
+      "Reincarnation",
+      "Action"
+    ],
+    "status": "ongoing",
+    "type": "Manhwa",
+    "updatedAt": "2026-09-16T14:08:49.369Z",
+    "isTrending": true,
+    "rank": 4,
+    "chapters": [
+      {
+        "id": "ch-130",
+        "chapterNumber": 130,
+        "title": "Pedang Suci Kembali",
+        "releasedAt": "2026-09-16T14:08:49.369Z",
+        "pages": [
+          "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: comic_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: comic_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  python-engine:
+    build:
+      context: ./python-engine
+      dockerfile: Dockerfile
+    container_name: comic_automation_engine
+    restart: always
+    depends_on:
+      - postgres-db
+    env_file:
+      - .env
+
+  frontend-app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: comic_nextjs_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres-db
+    env_file:
+      - .env
+
+volumes:
+  pgdata:
