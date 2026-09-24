@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Link2, PlusCircle, Trash2, CheckCircle2, AlertCircle, Sparkles, Layers, RefreshCw, ShieldCheck, LogOut } from "lucide-react";
+import { Link2, PlusCircle, Trash2, CheckCircle2, AlertCircle, Sparkles, Layers, RefreshCw, ShieldCheck, LogOut, ImagePlus, Eye, X } from "lucide-react";
 import { Comic } from "@/lib/data";
 
 export default function AdminPage() {
@@ -12,6 +12,7 @@ export default function AdminPage() {
 
   // Form states for URL Scrape
   const [scrapeUrl, setScrapeUrl] = useState("");
+  const [scrapePages, setScrapePages] = useState("");
 
   // Form states for Manual Comic
   const [comicTitle, setComicTitle] = useState("");
@@ -26,6 +27,7 @@ export default function AdminPage() {
   const [chapterNumber, setChapterNumber] = useState("");
   const [chapterTitle, setChapterTitle] = useState("");
   const [pagesInput, setPagesInput] = useState("");
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleLogout = async () => {
     await fetch("/api/admin/auth", { method: "DELETE" });
@@ -56,21 +58,40 @@ export default function AdminPage() {
     setTimeout(() => setAlert(null), 5000);
   };
 
+  // Helper: parse textarea into array of URLs
+  const parseUrlList = (raw: string): string[] => {
+    return raw
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line.length > 0 && (line.startsWith("http://") || line.startsWith("https://")));
+  };
+
   // 1. Submit Auto Import from URL
   const handleScrapeSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!scrapeUrl.trim()) return;
+
+    const pageUrls = parseUrlList(scrapePages);
+    if (pageUrls.length === 0) {
+      handleAlert("error", "Masukkan minimal 1 URL gambar halaman komik agar episode bisa ditampilkan ke user.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch("/api/admin/scrape-url", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: scrapeUrl.trim() }),
+        body: JSON.stringify({
+          url: scrapeUrl.trim(),
+          pages: pageUrls,
+        }),
       });
       const data = await res.json();
       if (data.success) {
         handleAlert("success", data.message);
         setScrapeUrl("");
+        setScrapePages("");
         fetchComics();
       } else {
         handleAlert("error", data.message || "Gagal mengimport URL.");
@@ -118,10 +139,17 @@ export default function AdminPage() {
     }
   };
 
-  // 3. Submit Manual Chapter
+  // 3. Submit Manual Chapter with Pages
   const handleChapterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedSlug) return;
+
+    const pageUrls = parseUrlList(pagesInput);
+    if (pageUrls.length === 0) {
+      handleAlert("error", "Masukkan minimal 1 URL gambar halaman komik. Paste URL gambar (satu per baris) dari situs sumber komik.");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await fetch("/api/comics/add-chapter", {
@@ -130,13 +158,17 @@ export default function AdminPage() {
         body: JSON.stringify({
           slug: selectedSlug,
           title: chapterTitle || (chapterNumber ? `Chapter ${chapterNumber}` : undefined),
+          customNumber: chapterNumber ? parseInt(chapterNumber) : undefined,
+          customPages: pageUrls,
         }),
       });
       const data = await res.json();
       if (data.success) {
-        handleAlert("success", `Episode Baru (${data.data.title}) berhasil diterbitkan ke view user!`);
+        handleAlert("success", `Episode Baru (${data.data.title}) berhasil diterbitkan ke view user! (${pageUrls.length} halaman)`);
         setChapterTitle("");
         setChapterNumber("");
+        setPagesInput("");
+        setShowPreview(false);
         fetchComics();
       } else {
         handleAlert("error", data.message);
@@ -162,6 +194,9 @@ export default function AdminPage() {
       handleAlert("error", "Gagal menghapus komik.");
     }
   };
+
+  // Preview parsed URLs
+  const previewUrls = (raw: string) => parseUrlList(raw);
 
   return (
     <div className="min-h-screen pt-24 pb-20 px-4 sm:px-8 max-w-6xl mx-auto select-none">
@@ -254,26 +289,78 @@ export default function AdminPage() {
 
       {/* Tab 1: Auto Import by URL */}
       {activeTab === "url_scrape" && (
-        <div className="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 rounded-3xl shadow-xl max-w-2xl">
+        <div className="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 rounded-3xl shadow-xl max-w-3xl">
           <div className="flex items-center gap-3 text-violet-400 font-bold text-lg mb-2">
             <Link2 className="w-5 h-5" /> Import Komik / Chapter dari Link Web Target
           </div>
           <p className="text-zinc-400 text-xs sm:text-sm mb-6 leading-relaxed">
-            Cukup tempelkan link URL dari situs manhwa (misal <code>https://www.topmanhua.fan/manhua/solo-leveling/</code> atau <code>https://mymanhwalist.com/manhwa/magic-emperor</code>). Sistem akan otomatis membaca judul, cover, dan menerbitkan komik atau episode baru langsung ke tampilan web!
+            Tempelkan link URL sumber komik, lalu <strong className="text-zinc-200">paste URL gambar halaman</strong> komik (satu per baris). 
+            Caranya: buka situs sumber → klik kanan gambar komik → <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-violet-300">Copy Image Address</code> → paste di bawah.
           </p>
 
-          <form onSubmit={handleScrapeSubmit} className="space-y-4">
+          <form onSubmit={handleScrapeSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold text-zinc-300 mb-2">URL Target Webtoon / Manhwa</label>
+              <label className="block text-xs font-semibold text-zinc-300 mb-2">URL Sumber Komik (Halaman Chapter)</label>
               <input
                 type="url"
                 required
-                placeholder="https://www.topmanhua.fan/manhua/magic-emperor/"
+                placeholder="https://www.topmanhua.fan/manhua/magic-emperor/chapter-320/"
                 value={scrapeUrl}
                 onChange={(e) => setScrapeUrl(e.target.value)}
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-100 outline-none focus:border-violet-500 font-mono"
               />
             </div>
+
+            <div>
+              <label className="flex items-center gap-2 text-xs font-semibold text-zinc-300 mb-2">
+                <ImagePlus className="w-3.5 h-3.5 text-violet-400" />
+                URL Gambar Halaman Komik (Satu URL per baris) *
+              </label>
+              <textarea
+                required
+                rows={8}
+                placeholder={`Paste URL gambar halaman komik, satu per baris:\nhttps://cdn.example.com/comic/ch320/001.jpg\nhttps://cdn.example.com/comic/ch320/002.jpg\nhttps://cdn.example.com/comic/ch320/003.jpg\nhttps://cdn.example.com/comic/ch320/004.jpg\nhttps://cdn.example.com/comic/ch320/005.jpg`}
+                value={scrapePages}
+                onChange={(e) => setScrapePages(e.target.value)}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-100 outline-none focus:border-violet-500 font-mono leading-relaxed resize-y"
+              />
+              {scrapePages.trim() && (
+                <div className="mt-2 flex items-center gap-3">
+                  <span className="text-xs text-zinc-500">
+                    {parseUrlList(scrapePages).length} URL gambar terdeteksi
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowPreview(!showPreview)}
+                    className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1 font-semibold"
+                  >
+                    <Eye className="w-3 h-3" /> {showPreview ? "Tutup Preview" : "Preview Gambar"}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Preview for scrape pages */}
+            {showPreview && scrapePages.trim() && (
+              <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-xs font-semibold text-zinc-400">Preview Halaman ({parseUrlList(scrapePages).length} gambar)</p>
+                  <button type="button" onClick={() => setShowPreview(false)} className="text-zinc-500 hover:text-zinc-300">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-48 overflow-y-auto">
+                  {parseUrlList(scrapePages).map((url, i) => (
+                    <div key={i} className="relative aspect-[3/4] bg-zinc-800 rounded-lg overflow-hidden border border-zinc-700">
+                      <img src={url} alt={`Page ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-0.5">
+                        <span className="text-[10px] font-bold text-zinc-300">{i + 1}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <button
               type="submit"
@@ -281,7 +368,7 @@ export default function AdminPage() {
               className="w-full py-3.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-xl shadow-violet-600/30 disabled:opacity-50"
             >
               {loading ? (
-                <span>Meng-import & Menganalisis Link...</span>
+                <span>Meng-import & Menyimpan Halaman...</span>
               ) : (
                 <>
                   <Sparkles className="w-4 h-4" />
@@ -384,9 +471,13 @@ export default function AdminPage() {
 
       {/* Tab 3: Manual Chapter Release */}
       {activeTab === "manual_chapter" && (
-        <div className="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 rounded-3xl shadow-xl max-w-2xl">
-          <h2 className="text-lg font-bold text-white mb-4">Rilis Episode / Chapter Baru</h2>
-          <form onSubmit={handleChapterSubmit} className="space-y-4">
+        <div className="bg-zinc-950 border border-zinc-800 p-6 sm:p-8 rounded-3xl shadow-xl max-w-3xl">
+          <h2 className="text-lg font-bold text-white mb-2">Rilis Episode / Chapter Baru</h2>
+          <p className="text-zinc-400 text-xs sm:text-sm mb-6 leading-relaxed">
+            Pilih komik, masukkan nomor chapter, lalu <strong className="text-zinc-200">paste URL gambar halaman komik</strong> dari situs sumber. 
+            Cara mendapatkan URL gambar: buka chapter di situs sumber → klik kanan pada gambar komik → <code className="bg-zinc-800 px-1.5 py-0.5 rounded text-violet-300">Copy Image Address</code>.
+          </p>
+          <form onSubmit={handleChapterSubmit} className="space-y-5">
             <div>
               <label className="block text-xs font-semibold text-zinc-300 mb-1.5">Pilih Komik Target *</label>
               <select
@@ -426,12 +517,71 @@ export default function AdminPage() {
               </div>
             </div>
 
+            {/* Pages URL Input */}
+            <div>
+              <label className="flex items-center gap-2 text-xs font-semibold text-zinc-300 mb-2">
+                <ImagePlus className="w-3.5 h-3.5 text-violet-400" />
+                URL Gambar Halaman Komik (Satu URL per baris) *
+              </label>
+              <textarea
+                required
+                rows={10}
+                placeholder={`Paste URL gambar halaman komik dari situs sumber, satu per baris:\nhttps://cdn.example.com/comic/ch15/001.jpg\nhttps://cdn.example.com/comic/ch15/002.jpg\nhttps://cdn.example.com/comic/ch15/003.jpg\nhttps://cdn.example.com/comic/ch15/004.jpg\nhttps://cdn.example.com/comic/ch15/005.jpg\nhttps://cdn.example.com/comic/ch15/006.jpg\nhttps://cdn.example.com/comic/ch15/007.jpg`}
+                value={pagesInput}
+                onChange={(e) => setPagesInput(e.target.value)}
+                className="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-zinc-100 outline-none focus:border-violet-500 font-mono leading-relaxed resize-y"
+              />
+              {pagesInput.trim() && (
+                <div className="mt-2 flex items-center gap-3">
+                  <span className="text-xs text-zinc-500">
+                    {parseUrlList(pagesInput).length} URL gambar terdeteksi
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setShowPreview(!showPreview)}
+                    className="text-xs text-violet-400 hover:text-violet-300 flex items-center gap-1 font-semibold"
+                  >
+                    <Eye className="w-3 h-3" /> {showPreview ? "Tutup Preview" : "Preview Gambar"}
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Preview Thumbnails */}
+            {showPreview && pagesInput.trim() && (
+              <div className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-xs font-semibold text-zinc-400">Preview Halaman ({parseUrlList(pagesInput).length} gambar)</p>
+                  <button type="button" onClick={() => setShowPreview(false)} className="text-zinc-500 hover:text-zinc-300">
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-2 max-h-48 overflow-y-auto">
+                  {parseUrlList(pagesInput).map((url, i) => (
+                    <div key={i} className="relative aspect-[3/4] bg-zinc-800 rounded-lg overflow-hidden border border-zinc-700">
+                      <img src={url} alt={`Page ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-center py-0.5">
+                        <span className="text-[10px] font-bold text-zinc-300">{i + 1}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm transition-all shadow-xl shadow-violet-600/30 disabled:opacity-50"
+              className="w-full py-3.5 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-xl shadow-violet-600/30 disabled:opacity-50"
             >
-              {loading ? "Memproses Rilis..." : "Rilis Episode ke View User"}
+              {loading ? (
+                "Memproses Rilis..."
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4" />
+                  Rilis Episode ke View User ({parseUrlList(pagesInput).length} halaman)
+                </>
+              )}
             </button>
           </form>
         </div>
