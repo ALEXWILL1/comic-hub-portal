@@ -64,15 +64,20 @@ export default function ReaderPage() {
         setAvailableChapters(chapterNums);
 
         // Find the current chapter data
-        const chapter = comic.chapters.find(
+        let chapter = comic.chapters.find(
           (ch) => ch.chapterNumber === currentChapter
         );
+
+        // Fallback to first available chapter if exact requested chapter doesn't exist
+        if (!chapter && comic.chapters.length > 0) {
+          chapter = comic.chapters[0];
+        }
 
         if (chapter) {
           setChapterTitle(chapter.title);
           setPages(chapter.pages || []);
         } else {
-          setError(`Chapter ${currentChapter} tidak ditemukan.`);
+          setError(`Belum ada chapter untuk komik ini.`);
           setPages([]);
         }
       } catch (err) {
